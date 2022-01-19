@@ -1,0 +1,132 @@
+.featured {
+   height: 90vh;
+   position: relative;
+
+   .category {
+      position: absolute;
+      top: 80px;
+      left: 50px;
+      font-size: 30px;
+      font-weight: 500;
+      color: white;
+      display: flex;
+      align-items: center;
+      z-index: 999;
+
+      select {
+         cursor: pointer;
+         background-color: var(--main-color);
+         border: 1px solid white;
+         color: white;
+         margin-left: 20px;
+         padding: 5px;
+      }
+   }
+
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+   }
+
+   // test
+
+   .overlay {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      background-image: -webkit-gradient(
+         linear,
+         left top,
+         left bottom,
+         color-stop(0, rgba(0, 0, 0, 0.5)),
+         color-stop(1, rgba(0, 0, 0, 0.2))
+      );
+      background-image: -o-linear-gradient(
+         bottom,
+         rgba(0, 0, 0, 0.5) 0%,
+         rgba(0, 0, 0, 0.2) 100%
+      );
+      background-image: -moz-linear-gradient(
+         bottom,
+         rgba(0, 0, 0, 0.5) 0%,
+         rgba(0, 0, 0, 0.2) 100%
+      );
+      background-image: -webkit-linear-gradient(
+         bottom,
+         rgba(0, 0, 0, 0.5) 0%,
+         rgba(0, 0, 0, 0.2) 100%
+      );
+      background-image: -ms-linear-gradient(
+         bottom,
+         rgba(0, 0, 0, 0.5) 0%,
+         rgba(0, 0, 0, 0.2) 100%
+      );
+      background-image: linear-gradient(
+         to bottom,
+         rgba(0, 0, 0, 0.5) 0%,
+         rgba(0, 0, 0, 0.2) 100%
+      );
+   }
+
+   h1 {
+      position: relative;
+      font-size: 60px;
+      padding: 5px 0;
+      margin: 0;
+   }
+   // test
+
+   .info {
+      width: 35%;
+      position: absolute;
+      left: 50px;
+      bottom: 100px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+
+      img {
+         width: 400px;
+      }
+
+      .desc {
+         margin: 20px 0px;
+      }
+
+      .buttons {
+         display: flex;
+
+         button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 500;
+            margin-right: 10px;
+            cursor: pointer;
+
+            &.play {
+               background-color: white;
+               color: var(--main-color);
+            }
+
+            &.more {
+               background-color: gray;
+               color: white;
+            }
+
+            span {
+               margin-left: 10px;
+            }
+         }
+      }
+   }
+}

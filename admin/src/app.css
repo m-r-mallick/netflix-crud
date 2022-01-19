@@ -1,0 +1,8 @@
+.body-container {
+   display: flex;
+}
+
+.component {
+   flex: 4;
+   background-image: linear-gradient(to right, blue, purple, pink);
+}
