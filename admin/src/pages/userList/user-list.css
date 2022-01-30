@@ -1,0 +1,52 @@
+.user-list {
+   flex: 4;
+}
+
+.user-list-user {
+   display: flex;
+   align-items: center;
+}
+
+.user-list-image {
+   width: 32px;
+   height: 32px;
+   border-radius: 50%;
+   object-fit: cover;
+   margin-right: 10px;
+}
+
+.action-icons-container {
+   display: flex;
+   align-items: center;
+}
+
+.user-list-image {
+   width: 32px;
+   height: 32px;
+   border-radius: 50%;
+   object-fit: cover;
+   margin-right: 10px;
+}
+
+.user-list-edit {
+   border-radius: 50%;
+   font-size: 35px !important;
+   color: rgb(60, 60, 236);
+   cursor: pointer;
+   vertical-align: middle;
+   margin-right: 15px;
+}
+
+.user-list-delete {
+   border-radius: 50%;
+   font-size: 35px !important;
+   color: red;
+   cursor: pointer;
+   vertical-align: middle;
+}
+
+.user-list-edit:hover,
+.user-list-delete:hover {
+   background-color: gainsboro;
+   transition: all 0.2s ease-in;
+}

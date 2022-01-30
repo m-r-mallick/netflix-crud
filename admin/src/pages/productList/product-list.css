@@ -1,0 +1,39 @@
+.productList {
+   flex: 4;
+}
+
+.productListItem {
+   display: flex;
+   align-items: center;
+}
+
+.productListImg {
+   width: 32px;
+   height: 32px;
+   border-radius: 50%;
+   object-fit: cover;
+   margin-right: 10px;
+}
+
+.productListEdit {
+   border-radius: 50%;
+   font-size: 35px !important;
+   color: rgb(60, 60, 236);
+   cursor: pointer;
+   vertical-align: middle;
+   margin-right: 15px;
+}
+
+.productListDelete {
+   border-radius: 50%;
+   font-size: 35px !important;
+   color: red;
+   cursor: pointer;
+   vertical-align: middle;
+}
+
+.productListEdit:hover,
+.productListDelete:hover {
+   background-color: gainsboro;
+   transition: all 0.2s ease-in;
+}
