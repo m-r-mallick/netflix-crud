@@ -1,10 +1,19 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline, EditOutlined } from "@material-ui/icons";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./product-list.css";
+import { getMovies } from "../../context/movieContext/apiCalls";
+import { MovieContext } from "../../context/movieContext/MovieContext";
+import "./movie-list.css";
 
-const ProductList = () => {
+const MovieList = () => {
+   const [data, setData] = useState([]);
+   const { movies, dispatch } = useContext(MovieContext);
+
+   useEffect(() => {
+      getMovies(dispatch);
+   }, [dispatch]);
+
    const handleDelete = (id) => {
       console.log(id);
    };
@@ -152,4 +161,4 @@ const ProductList = () => {
    );
 };
 
-export default ProductList;
+export default MovieList;

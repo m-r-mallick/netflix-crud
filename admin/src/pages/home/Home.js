@@ -5,62 +5,11 @@ import WidgetLg from "../../components/widgetLg/WidgetLg";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import "./home.css";
 
-const data = [
-   {
-      name: "Jan",
-      "Active User": 4000,
-   },
-   {
-      name: "Feb",
-      "Active User": 3000,
-   },
-   {
-      name: "Mar",
-      "Active User": 2000,
-   },
-   {
-      name: "Apr",
-      "Active User": 2780,
-   },
-   {
-      name: "May",
-      "Active User": 1890,
-   },
-   {
-      name: "Jun",
-      "Active User": 2390,
-   },
-   {
-      name: "Jul",
-      "Active User": 3490,
-   },
-   {
-      name: "Aug",
-      "Active User": 3990,
-   },
-   {
-      name: "Sep",
-      "Active User": 3490,
-   },
-   {
-      name: "Oct",
-      "Active User": 4490,
-   },
-   {
-      name: "Nov",
-      "Active User": 3190,
-   },
-   {
-      name: "Dec",
-      "Active User": 2490,
-   },
-];
-
-const Home = () => {
+const Home = ({ data }) => {
    return (
       <div className="home">
          <FeaturedInfo />
-         <Chart title="User Analytics" data={data} grid dataKey="Active User" />
+         <Chart title="User Analytics" data={data} grid dataKey="New Users" />
          <div className="home-widgets">
             <WidgetSm />
             <WidgetLg />

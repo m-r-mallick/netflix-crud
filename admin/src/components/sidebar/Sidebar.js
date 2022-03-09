@@ -7,10 +7,10 @@ import {
    ChatBubbleOutline,
    DynamicFeed,
    Home,
+   LocalMovies,
    MailOutline,
    PermIdentity,
    Report,
-   Storefront,
    Timeline,
    TrendingUp,
    WorkOutline,
@@ -46,9 +46,9 @@ const Sidebar = () => {
                      </li>
                   </Link>
 
-                  <Link to="/products" className="link">
+                  <Link to="/movies" className="link">
                      <li className="sidebar-list-item">
-                        <Storefront className="sidebar-icon" /> Products
+                        <LocalMovies className="sidebar-icon" /> Movies
                      </li>
                   </Link>
 

@@ -66,7 +66,7 @@ router.get("/", async (req, res) => {
    if (req.user.isAdmin) {
       try {
          const allUsers = query
-            ? await User.find().sort({ _id: -1 }).limit(10)
+            ? await User.find().sort({ _id: -1 }).limit(5)
             : await User.find();
          const formattedUsersList = allUsers.map((user) => {
             const { password, ...restInfo } = user._doc;

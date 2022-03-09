@@ -37,14 +37,17 @@
 }
 
 .widget-sm-username {
+   text-align: center;
    font-weight: 600;
 }
 
 .widget-sm-usertitle {
+   text-align: center;
    font-weight: 300;
 }
 
 .widget-sm-button {
+   float: right;
    display: flex;
    align-items: center;
    border: none;
