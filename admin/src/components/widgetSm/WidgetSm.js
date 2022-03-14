@@ -1,34 +1,21 @@
 import { Visibility } from "@material-ui/icons";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { token } from "../../token";
+import React, { useContext, useEffect } from "react";
+import { getUsers } from "../../context/userContext/apiCalls";
+import { UserContext } from "../../context/userContext/UserContext";
 import "./widget-sm.css";
 
 const WidgetSm = () => {
-   const [newUsers, setNewUsers] = useState([]);
+   const { users, dispatch } = useContext(UserContext);
    useEffect(() => {
-      const getNewUsers = async () => {
-         try {
-            const res = await axios.get(`/users?new=true`, {
-               headers: {
-                  token: token,
-               },
-            });
-            setNewUsers(res.data?.users);
-         } catch (error) {
-            console.log(error);
-         }
-      };
-      getNewUsers();
-   }, []);
-   console.log(newUsers);
+      getUsers(dispatch, true);
+   }, [dispatch]);
 
    return (
       <div className="widget-sm">
          <span className="widget-sm-title">Latest Members</span>
          <ul className="widget-sm-list">
-            {newUsers.length > 0 &&
-               newUsers.map((user) => {
+            {users.length > 0 &&
+               users.map((user) => {
                   return (
                      <li key={user._id} className="widget-sm-list-item">
                         <img

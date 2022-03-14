@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./user-list.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline, EditOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/userContext/UserContext";
+import { deleteUser, getUsers } from "../../context/userContext/apiCalls";
 
 const UserList = () => {
-   const handleEdit = (params) => {
-      console.log(params);
-   };
-   const handleDelete = (params) => {
-      console.log(params);
+   const { users, dispatch } = useContext(UserContext);
+
+   useEffect(() => {
+      getUsers(dispatch);
+   }, [dispatch]);
+
+   const handleDelete = (id) => {
+      deleteUser(id, dispatch);
    };
    const columns = [
-      { field: "id", headerName: "ID", width: 90 },
+      { field: "_id", headerName: "ID", width: 190 },
       {
          field: "user",
          headerName: "User",
@@ -21,7 +26,10 @@ const UserList = () => {
             <div className="user-list-user">
                <img
                   className="user-list-image"
-                  src={params.row.avatar}
+                  src={
+                     params.row.profilePic ||
+                     "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/2048px-OOjs_UI_icon_userAvatar.svg.png"
+                  }
                   alt="avatar"
                />
                {params.row.username}
@@ -29,13 +37,18 @@ const UserList = () => {
          ),
       },
       {
-         field: "status",
-         headerName: "Status",
+         field: "isAdmin",
+         headerName: "Is Admin?",
          width: 150,
       },
       {
-         field: "transaction",
-         headerName: "Transaction",
+         field: "email",
+         headerName: "Email",
+         width: 200,
+      },
+      {
+         field: "createdAt",
+         headerName: "Registration",
          width: 200,
       },
       {
@@ -44,19 +57,16 @@ const UserList = () => {
          width: 160,
          renderCell: (params) => (
             <div className="action-icons-container">
-               <Link to={`/user/${params.row.id}`}>
-                  <EditOutlined
-                     className="user-list-edit"
-                     onClick={() => {
-                        handleEdit(params);
-                     }}
-                  />
+               <Link
+                  to={{ pathname: `/user/${params.row._id}`, user: params.row }}
+               >
+                  <EditOutlined className="user-list-edit" />
                </Link>
 
                <DeleteOutline
                   className="user-list-delete"
                   onClick={() => {
-                     handleDelete(params);
+                     handleDelete(params.row._id);
                   }}
                />
             </div>
@@ -64,26 +74,16 @@ const UserList = () => {
       },
    ];
 
-   const rows = [
-      {
-         id: 1,
-         username: "Jon Snow",
-         avatar:
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.livemint.com%2Frf%2FImage-621x414%2FLiveMint%2FPeriod2%2F2018%2F10%2F03%2FPhotos%2FProcessed%2Fjonsnow-kHOF--621x414%40LiveMint.jpg&f=1&nofb=1",
-         email: "jon@gmail.com",
-         status: "active",
-         transaction: "$120.00",
-      },
-   ];
    return (
       <div className="user-list">
          <DataGrid
-            rows={rows}
+            rows={users}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
             checkboxSelection
             disableSelectionOnClick
+            getRowId={(r) => r._id}
          />
       </div>
    );

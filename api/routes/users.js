@@ -110,7 +110,6 @@ router.get("/stats/", async (req, res) => {
             },
          },
       ]);
-      console.log(data);
       const formattedData = data.map((obj) => {
          const resObj = { month: months[obj._id - 1], signUps: obj.total };
          return resObj;

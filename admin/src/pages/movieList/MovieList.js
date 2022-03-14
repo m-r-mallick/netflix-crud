@@ -1,13 +1,12 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline, EditOutlined } from "@material-ui/icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getMovies } from "../../context/movieContext/apiCalls";
+import { deleteMovie, getMovies } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 import "./movie-list.css";
 
 const MovieList = () => {
-   const [data, setData] = useState([]);
    const { movies, dispatch } = useContext(MovieContext);
 
    useEffect(() => {
@@ -15,118 +14,33 @@ const MovieList = () => {
    }, [dispatch]);
 
    const handleDelete = (id) => {
-      console.log(id);
+      deleteMovie(id, dispatch);
    };
 
-   const productRows = [
-      {
-         id: 1,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 2,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 3,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 4,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 5,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 6,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 7,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 8,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 9,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-      {
-         id: 10,
-         name: "Apple Airpods",
-         img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-         stock: 123,
-         status: "active",
-         price: "$120.00",
-      },
-   ];
-
    const columns = [
-      { field: "id", headerName: "ID", width: 90 },
+      { field: "_id", headerName: "ID", width: 200 },
       {
-         field: "product",
-         headerName: "Product",
+         field: "movie",
+         headerName: "Movie",
          width: 200,
          renderCell: (params) => {
             return (
                <div className="productListItem">
-                  <img className="productListImg" src={params.row.img} alt="" />
-                  {params.row.name}
+                  <img
+                     className="productListImg"
+                     src={params.row.img}
+                     alt={params.row.imgTitle}
+                  />
+                  {params.row.title}
                </div>
             );
          },
       },
-      { field: "stock", headerName: "Stock", width: 200 },
-      {
-         field: "status",
-         headerName: "Status",
-         width: 120,
-      },
-      {
-         field: "price",
-         headerName: "Price",
-         width: 160,
-      },
+      { field: "genre", headerName: "Genre", width: 120 },
+      { field: "year", headerName: "Year", width: 120 },
+      { field: "limit", headerName: "Limit", width: 120 },
+      { field: "isSeries", headerName: "Is Series?", width: 120 },
+
       {
          field: "action",
          headerName: "Action",
@@ -134,12 +48,17 @@ const MovieList = () => {
          renderCell: (params) => {
             return (
                <>
-                  <Link to={`/product/${params.row.id}`}>
+                  <Link
+                     to={{
+                        pathname: `/movie/${params.row._id}`,
+                        movie: params.row,
+                     }}
+                  >
                      <EditOutlined className="productListEdit" />
                   </Link>
                   <DeleteOutline
                      className="productListDelete"
-                     onClick={() => handleDelete(params.row.id)}
+                     onClick={() => handleDelete(params.row._id)}
                   />
                </>
             );
@@ -150,12 +69,13 @@ const MovieList = () => {
    return (
       <div className="productList">
          <DataGrid
-            rows={productRows}
+            rows={movies}
             disableSelectionOnClick
             columns={columns}
             pageSize={8}
             rowsPerPageOptions={[8]}
             checkboxSelection
+            getRowId={(r) => r._id}
          />
       </div>
    );

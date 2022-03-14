@@ -8,7 +8,7 @@ const listRouter = require("./routes/lists");
 const app = express();
 require("dotenv").config();
 
-app.use(json());
+app.use(json({ limit: "50mb" }));
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);

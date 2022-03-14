@@ -1,60 +1,83 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { createUser } from "../../context/userContext/apiCalls";
+import { UserContext } from "../../context/userContext/UserContext";
+import { fileToDataURI } from "../../misc/helpers";
 import "./new-user.css";
 
 const NewUser = () => {
+   const { dispatch } = useContext(UserContext);
+   const [user, setUser] = useState({});
+
+   const handleCreate = (e) => {
+      e.preventDefault();
+      dispatch(createUser(user, dispatch));
+   };
+
+   const handleChange = (e) => {
+      setUser({ ...user, [e.target.name]: e.target.value });
+   };
+
    return (
       <div className="new-user">
          <h1 className="new-user-title">New User</h1>
          <form className="new-user-form">
             <div className="new-user-item">
-               <label> Username</label>
-               <input type="text" placeholder="Username" />
+               <label> Avatar</label>
+               <input
+                  type="file"
+                  id="profilePic"
+                  name="profilePic"
+                  style={{ border: "none", paddingLeft: "0px" }}
+                  onChange={(e) =>
+                     fileToDataURI(e.target.files[0])
+                        .then((res) => setUser({ ...user, profilePic: res }))
+                        .catch((err) => console.log(err))
+                  }
+               />
             </div>
             <div className="new-user-item">
-               <label> Full Name</label>
-               <input type="text" placeholder="Full Name" />
+               <label> Username</label>
+               <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  onChange={handleChange}
+               />
             </div>
             <div className="new-user-item">
                <label> Email</label>
-               <input type="email" placeholder="Email" />
+               <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+               />
             </div>
             <div className="new-user-item">
                <label> Password</label>
-               <input type="password" placeholder="Password" />
+               <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+               />
             </div>
             <div className="new-user-item">
-               <label> Phone</label>
-               <input type="text" placeholder="Phone" />
-            </div>
-            <div className="new-user-item">
-               <label> Address</label>
-               <input type="text" placeholder="Address" />
-            </div>
-            <div className="new-user-item">
-               <label>Gender</label>
-               <div className="new-user-gender">
-                  <input type="radio" name="gender" id="male" value="male" />
-                  <label htmlFor="male">Male</label>
-                  <input
-                     type="radio"
-                     name="gender"
-                     id="female"
-                     value="female"
-                  />
-                  <label htmlFor="female">Female</label>
-                  <input type="radio" name="gender" id="other" value="other" />
-                  <label htmlFor="other">Other</label>
-               </div>
-            </div>
-            <div className="new-user-item">
-               <label>Active</label>
-               <select className="new-user-select">
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
+               <label>Admin</label>
+               <select
+                  className="new-user-select"
+                  name="isAdmin"
+                  onChange={handleChange}
+               >
+                  <option value="">Select</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
                </select>
             </div>
          </form>
-         <button className="new-user-button">Create</button>
+         <button className="new-user-button" onClick={handleCreate}>
+            Create
+         </button>
       </div>
    );
 };

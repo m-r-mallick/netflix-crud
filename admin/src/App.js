@@ -12,13 +12,16 @@ import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
 import MovieList from "./pages/movieList/MovieList";
-import Product from "./pages/product/Product";
-import NewProduct from "./pages/newProduct/NewProduct";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { token } from "./token";
 import Login from "./pages/login/Login";
 import { AuthContext } from "./context/authContext/AuthContext";
+import Movie from "./pages/movie/Movie";
+import NewMovie from "./pages/newMovie/NewMovie";
+import GenreList from "./pages/genreList/GenreList";
+import List from "./pages/list/List";
+import NewList from "./pages/newList/NewList";
 
 const App = () => {
    const [userStats, setUserStats] = useState([]);
@@ -53,7 +56,7 @@ const App = () => {
             <Route exact path="/login">
                {user ? <Redirect to="/" /> : <Login />}
             </Route>
-            {user && (
+            {user ? (
                <>
                   <Topbar />
                   <div className="body-container">
@@ -70,17 +73,28 @@ const App = () => {
                      <Route exact path="/newUser">
                         <NewUser />
                      </Route>
+                     <Route exact path="/lists">
+                        <GenreList />
+                     </Route>
+                     <Route exact path="/list/:listId">
+                        <List />
+                     </Route>
+                     <Route exact path="/newList">
+                        <NewList />
+                     </Route>
                      <Route exact path="/movies">
                         <MovieList />
                      </Route>
-                     <Route exact path="/product/:productId">
-                        <Product />
+                     <Route exact path="/movie/:movieId">
+                        <Movie />
                      </Route>
-                     <Route exact path="/newproduct">
-                        <NewProduct />
+                     <Route exact path="/newMovie">
+                        <NewMovie />
                      </Route>
                   </div>
                </>
+            ) : (
+               <Redirect to="/login" />
             )}
          </Switch>
       </Router>

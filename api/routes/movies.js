@@ -96,7 +96,7 @@ router.get("/", async (req, res) => {
          return res.status(500).json(error);
       }
    } else {
-      return req.status(401).json({ error: "Permission denied!" });
+      return res.status(401).json({ error: "Permission denied!" });
    }
 });
 

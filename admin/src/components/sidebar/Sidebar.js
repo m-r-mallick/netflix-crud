@@ -2,14 +2,14 @@ import React from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
 import {
-   AttachMoney,
    BarChart,
-   ChatBubbleOutline,
-   DynamicFeed,
    Home,
+   ListAltOutlined,
+   ListOutlined,
    LocalMovies,
-   MailOutline,
+   MovieCreation,
    PermIdentity,
+   PersonAddOutlined,
    Report,
    Timeline,
    TrendingUp,
@@ -52,9 +52,12 @@ const Sidebar = () => {
                      </li>
                   </Link>
 
-                  <li className="sidebar-list-item">
-                     <AttachMoney className="sidebar-icon" /> Transactions
-                  </li>
+                  <Link to="/lists" className="link">
+                     <li className="sidebar-list-item">
+                        <ListOutlined className="sidebar-icon" /> Lists
+                     </li>
+                  </Link>
+
                   <li className="sidebar-list-item">
                      <BarChart className="sidebar-icon" /> Reports
                   </li>
@@ -63,22 +66,30 @@ const Sidebar = () => {
             <div className="sidebar-menu">
                <h3 className="sidebar-title">Notifications</h3>
                <ul className="sidebar-list">
-                  <li className="sidebar-list-item">
-                     <MailOutline className="sidebar-icon" /> Mail
-                  </li>
-                  <li className="sidebar-list-item">
-                     <DynamicFeed className="sidebar-icon" /> Feedback
-                  </li>
-                  <li className="sidebar-list-item">
-                     <ChatBubbleOutline className="sidebar-icon" /> Messages
-                  </li>
+                  <Link to="/newMovie" className="link">
+                     <li className="sidebar-list-item">
+                        <MovieCreation className="sidebar-icon" /> Movie/Series
+                     </li>
+                  </Link>
+
+                  <Link to="/newList" className="link">
+                     <li className="sidebar-list-item">
+                        <ListAltOutlined className="sidebar-icon" /> List
+                     </li>
+                  </Link>
+
+                  <Link to="/newUser" className="link">
+                     <li className="sidebar-list-item">
+                        <PersonAddOutlined className="sidebar-icon" /> User
+                     </li>
+                  </Link>
                </ul>
             </div>
             <div className="sidebar-menu">
                <h3 className="sidebar-title">Staff</h3>
                <ul className="sidebar-list">
                   <li className="sidebar-list-item">
-                     <WorkOutline className="sidebar-icon" /> Manage
+                     <WorkOutline className="sidebar-icon" /> Manage Users
                   </li>
                   <li className="sidebar-list-item">
                      <Timeline className="sidebar-icon" /> Analytics
